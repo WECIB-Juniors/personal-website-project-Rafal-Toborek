@@ -7,19 +7,71 @@ Dark Shades: 241C2C
 */
 
 * {
-box-sizing: border-box; background-color: #241C2C;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #241C2C; /* page background (dark) */
+  color: #F3F5F3;            /* default text color on page */
+  margin: 0;
+}
+
+/* make column panels stand out from the page background */
+.list.flex-container > * {
+  margin: 0;
+  padding: 12px;
+  background: #F3F5F3; /* card background (light) */
+  color: #241C2C;      /* text color inside cards */
+  border-radius: 8px;
+}
+
+header {
+  background-color: #241C2C;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* move header content to the left */
+  gap: 20px;
+  padding: 16px 24px; /* left/right padding so content isn't flush to the edge */
 }
 
 .pfp {
-    display: inline-block; border-radius: 50%; width: 200px;
+    display: inline-block;
+    border-radius: 10%;
+    width: 200px;
+    flex-shrink: 0;
+    margin-right: 16px; /* keep space between image and name */
 }
 
 .name {
-    font-family: 'Times New Roman', Times, serif; font-size: 50px; color: #647CB1; text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+    color: #647CB1;
+    margin: 0;
+    line-height: 1;
+    text-align: center;   /* center the text */
+    flex: 1 1 auto;       /* let the name take remaining header space so it's centered while pfp stays left */
+}
+
+/* Stack vertically on small screens */
+@media screen and (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .name {
+    text-align: center;
+    font-size: 36px;
+    flex: none; /* don't stretch when stacked vertically */
+  }
+
+  .pfp {
+    width: 160px;
+  }
 }
 
 .body {
-    color: #868D9C; font-family: 'Times New Roman', Times, serif; font-size: 20px; text-align: center; padding: 10px;
+    color: #647CB1; font-family: 'Times New Roman', Times, serif; font-size: 20px; text-align: center; padding: 10px;
 }
 
 .list_title {
@@ -27,7 +79,7 @@ box-sizing: border-box; background-color: #241C2C;
 }
 
 .list {
-    color: #868D9C; font-family: 'Times New Roman', Times, serif; font-size: 20px;
+    color: #647CB1; font-family: 'Times New Roman', Times, serif; font-size: 20px;
 }
 
 .bold {
@@ -38,9 +90,7 @@ box-sizing: border-box; background-color: #241C2C;
      font-family: 'Times New Roman', Times, serif; font-size: 35px; color: #647CB1; font-weight: bold;
 }
 
-.button {
-    color: #F3F5F3; font-family: 'Times New Roman', Times, serif; font-size: 20px;
-}
+
 
 .navbar {
   list-style-type: none;
@@ -56,15 +106,84 @@ box-sizing: border-box; background-color: #241C2C;
 
 .navbar li a {
   display: block;
-  color: white;
+  color: #F3F5F3;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 .navbar li a:hover {
-  background-color: #111111;
+  background-color: #868D9C;
 }
 
+
+.list.flex-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "left main right";
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+.list.flex-container > * {
+  margin: 0;
+  padding: 12px;
+  background: #F3F5F3;
+  border-radius: 8px;
+  color: inherit;
+}
+
+.list.flex-container > .left  { grid-area: left;  }
+.list.flex-container > .main  { grid-area: main;  }
+.list.flex-container > .right { grid-area: right; }
+
+.list.flex-container .left,
+.list.flex-container .right {
+  font-size: 18px;
+  position: static; /* disable sticky so side columns scroll normally */
+  top: auto;
+}
+
+.list.flex-container .main {
+  font-size: 20px;
+}
+
+/* Two-column on medium screens: left + main, right flows below */
+@media screen and (max-width: 900px) {
+  .list.flex-container {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+      "left main"
+      "right right";
+  }
+
+  .list.flex-container .left,
+  .list.flex-container .right {
+    position: static;
+  }
+}
+
+/* Single column on small screens: main first, then left, then right */
+@media screen and (max-width: 600px) {
+  .list.flex-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "main"
+      "left"
+      "right";
+  }
+}
+
+/* 
+Light Shades: F3F5F3
+Light Accents: 868D9C
+Main BBrand Color: 75737E
+Dark Accent: 647CB1
+Dark Shades: 241C2C 
+*/
 
 
